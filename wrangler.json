@@ -1,12 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "barber2",
-  "main": "./dist/_worker.js/index.js",
+  "pages_build_output_dir": "dist",
   "compatibility_date": "2026-08-18",
   "compatibility_flags": [
     "nodejs_compat"
-  ],
-  "assets": {
-    "directory": "./dist"
-  }
+  ]
 }
