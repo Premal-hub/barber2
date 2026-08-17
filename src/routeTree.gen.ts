@@ -9,27 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as BookRouteImport } from './routes/book'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminServicesRouteImport } from './routes/admin.services'
-import { Route as AdminNewBookingRouteImport } from './routes/admin.new-booking'
-import { Route as AdminMyScheduleRouteImport } from './routes/admin.my-schedule'
-import { Route as AdminEmployeesRouteImport } from './routes/admin.employees'
-import { Route as AdminBranchesRouteImport } from './routes/admin.branches'
-import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 import { Route as AdminBarbersRouteImport } from './routes/admin.barbers'
+import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
+import { Route as AdminBranchesRouteImport } from './routes/admin.branches'
+import { Route as AdminEmployeesRouteImport } from './routes/admin.employees'
+import { Route as AdminMyScheduleRouteImport } from './routes/admin.my-schedule'
+import { Route as AdminNewBookingRouteImport } from './routes/admin.new-booking'
+import { Route as AdminServicesRouteImport } from './routes/admin.services'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookRoute = BookRouteImport.update({
-  id: '/book',
-  path: '/book',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -37,9 +32,14 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -47,29 +47,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminServicesRoute = AdminServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminNewBookingRoute = AdminNewBookingRouteImport.update({
-  id: '/new-booking',
-  path: '/new-booking',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMyScheduleRoute = AdminMyScheduleRouteImport.update({
-  id: '/my-schedule',
-  path: '/my-schedule',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminEmployeesRoute = AdminEmployeesRouteImport.update({
-  id: '/employees',
-  path: '/employees',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminBranchesRoute = AdminBranchesRouteImport.update({
-  id: '/branches',
-  path: '/branches',
+const AdminBarbersRoute = AdminBarbersRouteImport.update({
+  id: '/barbers',
+  path: '/barbers',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminBookingsRoute = AdminBookingsRouteImport.update({
@@ -77,9 +57,29 @@ const AdminBookingsRoute = AdminBookingsRouteImport.update({
   path: '/bookings',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminBarbersRoute = AdminBarbersRouteImport.update({
-  id: '/barbers',
-  path: '/barbers',
+const AdminBranchesRoute = AdminBranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEmployeesRoute = AdminEmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMyScheduleRoute = AdminMyScheduleRouteImport.update({
+  id: '/my-schedule',
+  path: '/my-schedule',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNewBookingRoute = AdminNewBookingRouteImport.update({
+  id: '/new-booking',
+  path: '/new-booking',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminServicesRoute = AdminServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -178,18 +178,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/book': {
-      id: '/book'
-      path: '/book'
-      fullPath: '/book'
-      preLoaderRoute: typeof BookRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -199,11 +192,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -213,39 +213,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/services': {
-      id: '/admin/services'
-      path: '/services'
-      fullPath: '/admin/services'
-      preLoaderRoute: typeof AdminServicesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/new-booking': {
-      id: '/admin/new-booking'
-      path: '/new-booking'
-      fullPath: '/admin/new-booking'
-      preLoaderRoute: typeof AdminNewBookingRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/my-schedule': {
-      id: '/admin/my-schedule'
-      path: '/my-schedule'
-      fullPath: '/admin/my-schedule'
-      preLoaderRoute: typeof AdminMyScheduleRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/employees': {
-      id: '/admin/employees'
-      path: '/employees'
-      fullPath: '/admin/employees'
-      preLoaderRoute: typeof AdminEmployeesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/branches': {
-      id: '/admin/branches'
-      path: '/branches'
-      fullPath: '/admin/branches'
-      preLoaderRoute: typeof AdminBranchesRouteImport
+    '/admin/barbers': {
+      id: '/admin/barbers'
+      path: '/barbers'
+      fullPath: '/admin/barbers'
+      preLoaderRoute: typeof AdminBarbersRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/bookings': {
@@ -255,11 +227,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBookingsRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/barbers': {
-      id: '/admin/barbers'
-      path: '/barbers'
-      fullPath: '/admin/barbers'
-      preLoaderRoute: typeof AdminBarbersRouteImport
+    '/admin/branches': {
+      id: '/admin/branches'
+      path: '/branches'
+      fullPath: '/admin/branches'
+      preLoaderRoute: typeof AdminBranchesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/employees': {
+      id: '/admin/employees'
+      path: '/employees'
+      fullPath: '/admin/employees'
+      preLoaderRoute: typeof AdminEmployeesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/my-schedule': {
+      id: '/admin/my-schedule'
+      path: '/my-schedule'
+      fullPath: '/admin/my-schedule'
+      preLoaderRoute: typeof AdminMyScheduleRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/new-booking': {
+      id: '/admin/new-booking'
+      path: '/new-booking'
+      fullPath: '/admin/new-booking'
+      preLoaderRoute: typeof AdminNewBookingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/services': {
+      id: '/admin/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AdminServicesRouteImport
       parentRoute: typeof AdminRoute
     }
   }

@@ -1,0 +1,50 @@
+Root Cause
+The error TypeError: createMiddleware is not a function occurs during SSR execution when @tanstack/react-router and @tanstack/react-start / @tanstack/router-plugin have mismatched package versions.
+
+In your package.json, @tanstack/react-router was pinned to 1.170.7 while @tanstack/react-start and @tanstack/router-plugin were pinned to 1.168.10. Because internal helper methods and middleware initializers (like createMiddleware) evolved between TanStack versions, the version mismatch broke SSR initialization on Render.
+
+What Was Fixed
+Updated 
+
+package.json
+ to use compatible version ranges across all @tanstack dependencies:
+
+"@tanstack/react-router": "^1.170.27"
+"@tanstack/react-start": "^1.168.44"
+"@tanstack/router-plugin": "^1.168.30"
+Next Steps for Deployment
+Commit and push the updated 
+
+package.json
+ and 
+
+package-lock.json
+ to your repository.
+Trigger a fresh build on Render.
+21:03, 13/08/2026
+ok then first cheak it working 
+21:09, 13/08/2026
+I have tested the production server build locally:
+
+Server Startup: node .output/server/index.mjs started cleanly without any middleware or router import errors.
+SSR Rendering: Tested fetching routes (http://localhost:3000/ and /book). The server successfully returned HTTP 200 OK with full server-side rendered HTML.
+Middleware Execution: The TypeError: createMiddleware is not a function error is 100% resolved.
+Once you push 
+
+package.json
+ and 
+
+package-lock.json
+ to git and deploy on Render, your site will load properly.
+
+21:09, 13/08/2026
+upload push to the git hub do it :https://github.com/Premal-hub/barber2.git 
+21:13, 13/08/2026
+The fix has been committed and pushed to GitHub:
+
+Repository: https://github.com/Premal-hub/barber2.git
+Branch: main
+Commit: cd1bfe2 (fix: align @tanstack dependencies to resolve createMiddleware SSR error)
+
+Render will now automatically pick up the new commit and rebuild the project cleanly.
+
