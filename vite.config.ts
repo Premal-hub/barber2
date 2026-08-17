@@ -11,7 +11,12 @@ export default defineConfig({
         const target = path.resolve("dist/_worker.js/wrangler.json");
         if (fs.existsSync(target)) {
           fs.unlinkSync(target);
-          console.log("[nitro-hook] Successfully removed dist/_worker.js/wrangler.json");
+        }
+      },
+      close() {
+        const target = path.resolve("dist/_worker.js/wrangler.json");
+        if (fs.existsSync(target)) {
+          fs.unlinkSync(target);
         }
       },
     },
