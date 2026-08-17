@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "postbuild": "node -e \"require('fs').rmSync('dist/_worker.js/wrangler.json', {force:true})\"",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "start": "node .output/server/index.mjs",
